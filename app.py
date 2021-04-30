@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 app.config.from_object('config.BaseConfig')
@@ -6,9 +6,9 @@ app.config.from_object('config.BaseConfig')
 
 @app.route('/')
 def index():
-    print(app.config)
-    return "index page"
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
+    print(app.config)
     app.run(debug=True)
