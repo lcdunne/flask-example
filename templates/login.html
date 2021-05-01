@@ -10,7 +10,7 @@
                 {{ form.username }}
                 <ul>
                     {% for error in form.username.errors %}
-                        {{ error }}
+                        <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </ul>
             </div>
@@ -20,7 +20,7 @@
                 {{ form.password }}
                 <ul>
                     {% for error in form.password.errors %}
-                        {{ error }}
+                        <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </ul>
             </div>

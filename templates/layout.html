@@ -4,8 +4,21 @@
     <title>Flask Example - {{ title|default("Home", true) }}</title>
 </head>
 <body>
-    {% block content %}
+    <div>
+        Flask Example:
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <ul>{{ message }}</ul>
+                {% endfor %}
+             </ul>
+        {% endif %}
+    {% endwith %}
 
-    {% endblock content %}
+    {% block content %}{% endblock content %}
 </body>
 </html>
