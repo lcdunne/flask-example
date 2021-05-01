@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+    <form method="POST" action="">
+        <fieldset>
+            <legend>Log In</legend>
+
+            <div>
+                {{ form.username.label }}
+                {{ form.username }}
+                <ul>
+                    {% for error in form.username.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div>
+                {{ form.password.label }}
+                {{ form.password }}
+                <ul>
+                    {% for error in form.password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </fieldset>
+        <div>
+            {{ form.submit() }}
+        </div>
+
+        {{ form.csrf_token }}
+
+    </form>
+
+</div>
+
+{% endblock content %}
