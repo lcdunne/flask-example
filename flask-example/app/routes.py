@@ -1,9 +1,6 @@
-from flask import (Flask, render_template, redirect, url_for)
-from forms import RegistrationForm, LoginForm
-
-
-app = Flask(__name__)
-app.config.from_object('config.BaseConfig')
+from flask import render_template, redirect, url_for
+from app import app
+from app.forms import RegistrationForm, LoginForm
 
 
 @app.route('/')
@@ -33,8 +30,3 @@ def login():
 @app.route('/home')
 def home():
     return "Logged in"
-
-
-if __name__ == '__main__':
-    print(app.config)
-    app.run(debug=True)
