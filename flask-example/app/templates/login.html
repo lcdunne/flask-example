@@ -24,11 +24,12 @@
                     {% endfor %}
                 </ul>
             </div>
+        <div>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label}}</p>
+            <p>{{ form.submit() }}</p>
+        </div>
 
         </fieldset>
-        <div>
-            {{ form.submit() }}
-        </div>
 
         {{ form.csrf_token }}
 

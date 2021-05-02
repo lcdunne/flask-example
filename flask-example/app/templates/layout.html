@@ -5,9 +5,9 @@
 </head>
 <body>
     <div>
-        Flask Example:
+        <h3>Flask Example:
         <a href="{{ url_for('register') }}">Register</a>
-        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('login') }}">Login</a></h3>
     </div>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
