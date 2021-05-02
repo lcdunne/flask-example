@@ -2,9 +2,6 @@ from flask import render_template, redirect, url_for, flash
 from app import app, db
 from app.forms import RegistrationForm, LoginForm
 from app.models import User
-from werkzeug.security import (
-    generate_password_hash,
-    check_password_hash)
 
 
 @app.route('/')
@@ -25,8 +22,9 @@ def register():
         if user is None:
             user = User(
                 username=form.username.data,
-                password_hash=generate_password_hash(form.password.data),
+                password_hash=form.password.data,
                 email=form.email.data)
+
             db.session.add(user)
             db.session.commit()
 
