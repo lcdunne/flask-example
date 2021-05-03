@@ -6,8 +6,8 @@
 <body>
     <div>
         <h3>Flask Example:
-        <a href="{{ url_for('register') }}">Register</a>
-        <a href="{{ url_for('login') }}">Login</a></h3>
+        <a href="{{ url_for('main.register') }}">Register</a>
+        <a href="{{ url_for('main.login') }}">Login</a></h3>
     </div>
     {% with messages = get_flashed_messages() %}
         {% if messages %}

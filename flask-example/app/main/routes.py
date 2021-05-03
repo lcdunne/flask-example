@@ -1,18 +1,28 @@
-from flask import render_template, redirect, url_for, flash
-from app import app, db
-from app.forms import RegistrationForm, LoginForm
+from flask import (
+    Blueprint, render_template,
+    redirect, url_for, flash)
+from app import db
+from app.main.forms import RegistrationForm, LoginForm
 from app.models import User
 from werkzeug.security import (
     generate_password_hash,
     check_password_hash)
 
 
-@app.route('/')
+# Blueprint Configuration
+main_bp = Blueprint(
+    'main', __name__,
+    template_folder='templates',
+    static_folder='static'
+)
+
+
+@main_bp.route('/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/registration', methods=['GET', 'POST'])
+@main_bp.route('/registration', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
 
@@ -33,11 +43,11 @@ def register():
         else:
             flash("Already exists. Log in instead.")
 
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     return render_template('registration.html', title='Register', form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@main_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     n_attempts = 3
@@ -48,14 +58,14 @@ def login():
             to_check = user.password_hash
             if check_password_hash(to_check, form.password.data):
                 n_attempts = 3
-                return redirect(url_for('home'))
+                return redirect(url_for('main.home'))
             else:
                 n_attempts -= 1
                 flash(f'Invalid credentials - {n_attempts} attempts left.')
-                return redirect(url_for('login'))
+                return redirect(url_for('main.login'))
     return render_template('login.html', title='Log In', form=form)
 
 
-@app.route('/home')
+@main_bp.route('/home')
 def home():
     return "Logged in"
