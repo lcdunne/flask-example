@@ -22,7 +22,7 @@ def register():
         if user is None:
             user = User(
                 username=form.username.data,
-                password_hash=form.password.data,
+                password=form.password.data,
                 email=form.email.data)
 
             db.session.add(user)
@@ -43,11 +43,13 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
-            to_check = user.password_hash
-            if check_password_hash(to_check, form.password.data):
+            # to_check = user.password_hash
+            if user.check_password(form.password.data):
+                print("Success")
                 n_attempts = 3
                 return redirect(url_for('home'))
             else:
+                print("Failure")
                 n_attempts -= 1
                 flash(f'Invalid credentials - {n_attempts} attempts left.')
                 return redirect(url_for('login'))
