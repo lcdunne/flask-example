@@ -1,20 +1,13 @@
 from flask import (
-    Blueprint, render_template,
+    render_template,
     redirect, url_for, flash)
-from app import db
-from app.main.forms import RegistrationForm, LoginForm
-from app.models import User
 from werkzeug.security import (
     generate_password_hash,
     check_password_hash)
-
-
-# Blueprint Configuration
-main_bp = Blueprint(
-    'main', __name__,
-    template_folder='templates',
-    static_folder='static'
-)
+from app import db
+from . import main_bp
+from app.models import User
+from .forms import RegistrationForm, LoginForm
 
 
 @main_bp.route('/')
